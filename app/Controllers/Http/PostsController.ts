@@ -1,10 +1,12 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
     import Post from "App/Models/Post";
     export default class PostsController {
-         public async index({}: HttpContextContract)
+         public async index({request}: HttpContextContract)
         {
-            const posts = await Post.query().preload('user');
-            return posts
+            const page = request.input('page', 1)
+            const limit = 2
+            const posts = await Post.query().preload('user').paginate(page,limit);
+            return posts.toJSON()
         }
         public async show({params}: HttpContextContract)
         {

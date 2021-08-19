@@ -28,6 +28,7 @@ Route.group(() => {
   Route.post("register", "AuthController.register");
   Route.post("login", "AuthController.login");
   Route.group(() => {
+    Route.post("logout", "AuthController.logout");
     Route.resource("posts", "PostsController").apiOnly();
     Route.get("users/posts", "UsersController.postsByUser");
   }).middleware("auth:api");
