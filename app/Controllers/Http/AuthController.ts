@@ -22,4 +22,11 @@ export default class AuthController {
     });
     return token.toJSON();
   }
+
+  public async logout({ auth}: HttpContextContract) {
+    await auth.use('api').revoke()
+      return {
+        message: "user logged out successfully"
+      }
+  }
 }
